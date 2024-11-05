@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phuket Flood Risk Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+      #map { height: 400px; width: 100%; }
+  </style>
+</head>
+<body>
+
+  <h5><b><i class="fa fa-dashboard"></i> Natural Disaster Maps</b></h5>
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+  <script>
+    // Initialize the map and set its view to Phuket
+    var map = L.map('map').setView([7.8804, 98.3923], 11);
+
+    // Define tile layers
+    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 18,
+        attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    var satellite = L.tileLayer('https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 18,
+    attribution: '&copy; Esri &mdash; Source: Esri, Earthstar Geographics, and the GIS User Community'
+    });
+
+
+    // Base maps object to hold all base layers
+    var baseMaps = {
+        "OpenStreetMap": osm,
+        "Satellite": satellite,
+        "Topographic": topo
+    };
+
+    // Overlay for data points
+    var riskMarkers = L.layerGroup();
+
+    // Data points
+    var data = [
+      {"Risk level code": 1, "Meaning": "พื้นที่เสี่ยงต่ำมาก", "District": "เมืองภูเก็ต", "Community": "เมืองเก่าชาร์เตอร์แบงค์","Disaster Types":"Flooded water","Disaster Types":"River overflow","X": 7.885713, "Y": 98.389212 },
+      { "Risk level code": 4, "Meaning": "พื้นที่เสี่ยงสูง", "District": "เมืองภูเก็ต", "Community": "ถนนสุทัศน์ ซอย 2", "X": 7.888774, "Y": 98.393332 },
+      { "Risk level code": 2, "Meaning": "พื้นที่เสี่ยงต่ำ", "District": "เมืองภูเก็ต", "Community": "เกาะแก้ว หมู่ 1","Disaster Types":"Flooded water", "X": 7.942502, "Y": 98.395392 },
+      { "Risk level code": 5, "Meaning": "พื้นที่เสี่ยงสูงมาก", "District": "กะทู้", "Community": "หาดป่าตอง", "X": 7.890304, "Y": 98.291022 },
+      {"Risk level code": 2,"Meaning": "พื้นที่เสี่ยงต่ำ","District": "เมืองภูเก็ต","Community": "","Disaster Types":"Flooded water", "X": 7.967663,"Y": 98.364493 },
+      {"Risk level code": 4,"Meaning": "พื้นที่เสี่ยงสูง","District": "เมืองภูเก็ต","Community": "","Disaster Types":"Flooded water","X": 7.918359,"Y": 98.388182},
+      {"Risk level code": 4,"Meaning": "พื้นที่เสี่ยงสูง","District": "เมืองภูเก็ต","Community": "","X": 7.897276,"Y": 98.409468},
+      {"Risk level code": 2,"Meaning": "พื้นที่เสี่ยงต่ำ","District": "เมืองภูเก็ต","Community": "","Disaster Types":"Flooded water","X": 7.867009,"Y": 98.331534},
+      {"Risk level code": 4,"Meaning": "พื้นที่เสี่ยงสูง","District": "เมืองภูเก็ต","Community": "","Disaster Types":"Flooded water","Disaster Types":"Flash flood","X": 7.850004,"Y": 98.296515},
+      {"Risk level code": 1,"Meaning": "พื้นที่เสี่ยงต่ำมาก","District": "กะทู้","Community": "ศาลเจ้ากะทู้","X": 7.914279,"Y": 98.341147},
+      {"Risk level code": 1,"Meaning": "พื้นที่เสี่ยงต่ำมาก","District": "กะทู้","Community": "เบ้ฮั้ว","Disaster Types":"Flooded water","X": 7.899996,"Y": 98.355395},
+      {"Risk level code": 1,"Meaning": "พื้นที่เสี่ยงต่ำมาก","District": "กะทู้","Community": "อิรวดี","Disaster Types":"Flooded water","X": 7.895065,"Y": 98.35385},
+      {"Risk level code": 3,"Meaning": "พื้นที่เสี่ยงปานกลาง","District": "กะทู้","Community": "ปั๊กกั้วหลาว","X": 7.92618,"Y": 98.333251},
+      {"Risk level code": 3,"Meaning": "พื้นที่เสี่ยงปานกลาง","District": "กะทู้","Community": "กะหลิม","Disaster Types":"Flooded water","Disaster Types":"Flash flood","X": 7.913258,"Y": 98.295142},
+      {"Risk level code": 3,"Meaning": "พื้นที่เสี่ยงปานกลาง","District": "กะทู้","Community": "โคกมะขาม","Disaster Types":"Flooded water","Disaster Types":"Flash flood","X": 7.906117,"Y": 98.301665},
+      {"Risk level code": 5,"Meaning": "พื้นที่เสี่ยงสูงมาก","District": "กะทู้","Community": "หาดป่าตอง","Disaster Types":"Flooded water","X": 7.890304,"Y": 98.291022},
+      {"Risk level code": 2,"Meaning": "พื้นที่เสี่ยงต่ำ","District": "กะทู้","Community": "","Disaster Types":"Flooded water","Disaster Types":"Flash flood","X": 7.954063,"Y": 98.296515},
+      {"Risk level code": 2,"Meaning": "พื้นที่เสี่ยงต่ำ","District": "กะทู้","Community": "","Village number": 6,"X": 7.943862,"Y": 98.279349},
+      {"Risk level code": 3,"Meaning": "พื้นที่เสี่ยงปานกลาง","District": "กะทู้","Community": "","Disaster Types":"Flooded water","Disaster Types":"Flash flood","X": 7.946242,"Y": 98.285872},
+      {"Risk level code": 4,"Meaning": "พื้นที่เสี่ยงสูง","District": "กะทู้","Community": "","Disaster Types":"Flooded water","Disaster Types":"Flash flood","X": 7.944882,"Y": 98.288619},
+      {"Risk level code": 4,"Meaning": "พื้นที่เสี่ยงสูง","District": "กะทู้","Community": "","Disaster Types":"Flooded water","Disaster Types":"Flash flood","X": 7.958823,"Y": 98.282439},
+      {"Risk level code": 2,"Meaning": "พื้นที่เสี่ยงต่ำ","District": "ถลาง","Community": "เชิงทะเล","Disaster Types":"Flooded water","X": 7.993503,"Y": 98.308188},
+      {"Risk level code": 2,"Meaning": "พื้นที่เสี่ยงต่ำ","District": "ถลาง","Community": "","X": 8.022061,"Y": 98.304755},
+      {"Risk level code": 4,"Meaning": "พื้นที่เสี่ยงสูง","District": "ถลาง","Community": "","X": 7.993843,"Y": 98.40758},
+      {"Risk level code": 2,"Meaning": "พื้นที่เสี่ยงต่ำ","District": "ถลาง","Community": "","Disaster Types":"Flooded water","X": 8.099565,"Y": 98.304755},
+      // Additional data points can go here
+    ];
+
+    // Function to set marker color based on risk level
+    function getColor(riskLevel) {
+        switch(riskLevel) {
+            case 1: return "green";
+            case 2: return "blue";
+            case 3: return "orange";
+            case 4: return "red";
+            case 5: return "darkred";
+            default: return "gray";
+        }
+    }
+
+    // Add markers to the map and the overlay layer
+    data.forEach(function(entry) {
+        var color = getColor(entry["Risk level code"]);
+        var marker = L.circleMarker([entry.X, entry.Y], {
+            color: color,
+            radius: 8,
+            fillOpacity: 0.7
+        }).addTo(riskMarkers);
+
+        marker.bindPopup(`<b>Community:</b> ${entry.Community}<br><b>District:</b> ${entry.District}<br><b>Risk Level:</b> ${entry.Meaning}<br><b>Disaster Types:</b> ${entry["Disaster Types"]}`);
+    });
+
+    // Add the risk markers layer to the map
+    riskMarkers.addTo(map);
+
+    // Layer control to toggle base maps and overlays
+    L.control.layers(baseMaps, { "Risk Points": riskMarkers }).addTo(map);
+  </script>
+
+</body>
+</html>

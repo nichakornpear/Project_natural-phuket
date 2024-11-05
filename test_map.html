@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet with Google Maps</title>
+    <!-- ใส่ CSS และ JavaScript ของ Leaflet -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <style>
+        /* ตั้งค่าให้แผนที่เต็มพื้นที่ตามต้องการ */
+        #map {
+            height: 500px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- กำหนดพื้นที่แสดงแผนที่ -->
+    <div id="map"></div>
+
+    <script>
+        // ตั้งค่าพิกัดเริ่มต้น (กรุงเทพมหานคร)
+        var bangkok = [7.89000, 98.38500];
+
+          // ตั้งค่าแผนที่เริ่มต้นที่พิกัดกรุงเทพฯ
+          var map = L.map('map').setView([13.736717, 100.523186], 10);
+
+// เลเยอร์แรก: Esri WorldTopoMap
+var topoMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Topo_Map/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri &mdash; Source: Esri, DeLorme, NAVTEQ, USGS, Intermap, iPC, NRCAN, Esri Japan, METI, Esri China (Hong Kong), Esri (Thailand), TomTom, 2012',
+    maxZoom: 19
+});
+
+// เลเยอร์ที่สอง: Esri WorldImagery
+var imageryMap = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles © Esri &mdash; Source: Esri, Earthstar Geographics',
+    maxZoom: 19
+});
+
+// เพิ่มเลเยอร์เริ่มต้น (เช่น WorldTopoMap) ลงในแผนที่
+topoMap.addTo(map);
+
+// กำหนดออบเจ็กต์เลเยอร์พื้นฐาน
+var baseLayers = {
+    "Esri World Topo Map": topoMap,
+    "Esri World Imagery": imageryMap
+};
+
+// เพิ่มตัวเลือกกล่องสลับเลเยอร์ (Layer Control) ลงในแผนที่
+L.control.layers(baseLayers).addTo(map);
+
+// กำหนดฟังก์ชันสำหรับกำหนดสีของ Marker ตามประเภทข้อมูล
+function getColor(type) {
+            switch(type) {
+                case 'type1': return 'red';
+                case 'type2': return 'orange';
+                case 'type3': return 'green';
+                case 'type4': return 'purple';
+                default: return 'blue';
+            }
+        }
+
+        // โหลดข้อมูลจากไฟล์ GeoJSON
+        fetch('D:/6530212008_Y3/A.Kai/Project/Data.json') // เปลี่ยนชื่อไฟล์ให้ตรงกับไฟล์ของคุณ
+            .then(response => response.json())
+            .then(data => {
+                L.geoJSON(data, {
+                    pointToLayer: function(feature, latlng) {
+                        // กำหนดสี Marker ตามประเภทข้อมูลใน properties
+                        var color = getColor(feature.properties.type);
+                        return L.circleMarker(latlng, {
+                            radius: 8,
+                            fillColor: color,  
+                            color: "#fff",
+                            weight: 1,
+                            opacity: 1,
+                            fillOpacity: 0.8
+                        });
+                    },
+                    onEachFeature: function(feature, layer) {
+                        // แสดงข้อมูลเมื่อคลิกที่ Marker
+                        layer.bindPopup(
+                            "<strong>" + feature.properties.name + "</strong><br>" +
+                            "ประเภท: " + feature.properties.type
+                        );
+                    }
+                }).addTo(map);
+            })
+            .catch(error => console.error('Error loading GeoJSON:', error))
+
+        // เพิ่ม marker ในแผนที่ที่พิกัดของกรุงเทพฯ
+        L.marker(bangkok).addTo(map)
+            .bindPopup("ภูเก็ต")
+            .openPopup();
+    </script>
+
+</body>
+</html>

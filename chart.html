@@ -1,0 +1,29 @@
+ <!DOCTYPE html>
+<html>
+<head>
+var data = [{
+    type: "choroplethmap", 
+    name: "Natural disaster chart", 
+    geojson: "https://raw.githubusercontent.com/python-visualization/folium/master/examples/data/us-states.json", 
+    Risk level code: [ "AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY" ],
+    District: [ 141, 140, 155, 147, 132, 146, 151, 137, 146, 136, 145, 141, 149, 151, 138, 158, 164, 141, 146, 145, 142, 150, 155, 160, 156, 161, 147, 164, 150, 152, 155, 167, 145, 146, 151, 154, 161, 145, 155, 150, 151, 162, 172, 169, 170, 151, 152, 173, 160, 176 ],
+    zmin: 1,
+     zmax: 5, 
+     colorbar: {
+        y: 0, 
+        yanchor: "bottom", 
+     title: {text: "Risk Level", side: "right"}
+     tickvals: [1, 2, 3, 4, 5], // ค่าที่จะปรากฏบนแถบสี
+     ticktext: ["พื้นที่เสี่ยงต่ำมาก", "พื้นที่เสี่ยงต่ำ", "พื้นที่เสี่ยงปานกลาง", "พื้นที่เสี่ยงสูง", "พื้นที่เสี่ยงสูงมาก"], //ข้อความที่ตรงกับแต่ละระดับ
+
+    }  
+}];
+   
+    var layout = {
+        map: {style: "dark", center: {lon: 98, lat: 7.89}, zoom: 0.8},
+         width: 600, 
+         height: 400, 
+         margin: {t: 0, b: 0}};
+   
+    Plotly.newPlot('myDiv', data, layout);
+    </html>

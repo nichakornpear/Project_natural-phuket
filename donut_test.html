@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f8ff; /* พื้นหลังสีอ่อน */
+        }
+        #myChart {
+            width: 100%;
+            max-width: 600px;
+            background-color: #ffffff; /* พื้นหลังแผนภูมิ */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* เงาเพื่อให้แผนภูมิดูโดดเด่น */
+        }
+    </style>
+</head>
+<body>
+
+<canvas id="myChart"></canvas>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+<script>
+const xValues = ["พื้นที่เสี่ยงต่ำมาก", "พื้นที่เสี่ยงต่ำ", "พื้นที่เสี่ยงปานกลาง", "พื้นที่เสี่ยงสูง", "พื้นที่เสี่ยงสูงมาก"];
+const yValues = [55, 49, 44, 24, 15];
+const barColors = [
+  "#00FF00",
+  "#FFFF00",
+  "#FFA500",
+  "#FF0000",
+  "#800000"
+];
+
+new Chart("myChart", {
+  type: "doughnut",
+  data: {
+    labels: xValues,
+    datasets: [{
+      backgroundColor: barColors,
+      data: yValues
+    }]
+  },
+  options: {
+    title: {
+      display: true,
+      text: "Disaster Risk Areas in Phuket",
+      fontSize: 24 // เพิ่มขนาดตัวอักษรที่นี่
+    }
+  }
+});
+</script>
+
+</body>
+</html>

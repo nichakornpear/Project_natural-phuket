@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choropleth Map</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+</head>
+<body>
+
+<div id="myDiv" style="width:600px;height:400px;"></div>
+
+<script>
+    // Function to fetch data from JSON file
+    async function loadData() {
+        try {
+            const response = await fetch('data.json');D:/6530212008_Y3/A.Kai/Project/Data.json// Path to your JSON file
+            const jsonData = await response.json();
+
+            // Data for the choropleth map
+            var data = [{
+                type: "choropleth",
+                name: "Natural disaster chart",
+                geojson: "https://raw.githubusercontent.com/python-visualization/folium/master/examples/data/us-states.json",
+                locations: jsonData.locations,  // Load locations from JSON file
+                z: jsonData.z,                  // Load 'z' values from JSON file
+                zmin: 1,
+                zmax: 5,
+                colorbar: {
+                    y: 0,
+                    yanchor: "bottom",
+                    title: {
+                        text: "Risk Level",
+                        side: "right"
+                    },
+                    tickvals: [1, 2, 3, 4, 5],
+                    ticktext: ["พื้นที่เสี่ยงต่ำมาก", "พื้นที่เสี่ยงต่ำ", "พื้นที่เสี่ยงปานกลาง", "พื้นที่เสี่ยงสูง", "พื้นที่เสี่ยงสูงมาก"]
+                },
+                colorscale: [
+                    [0, 'rgb(240, 240, 240)'],
+                    [0.2, 'rgb(220, 220, 220)'],
+                    [0.4, 'rgb(200, 150, 150)'],
+                    [0.6, 'rgb(180, 100, 100)'],
+                    [0.8, 'rgb(160, 60, 60)'],
+                    [1, 'rgb(140, 30, 30)']
+                ],
+                marker: {
+                    line: {
+                        color: 'rgb(255,255,255)',
+                        width: 1
+                    }
+                }
+            }];
+
+            // Map layout
+            var layout = {
+                mapbox: {
+                    style: "dark",
+                    center: { lon: 98, lat: 7.89 },
+                    zoom: 3
+                },
+                width: 600,
+                height: 400,
+                margin: { t: 0, b: 0 }
+            };
+
+            // Plot the map
+            Plotly.newPlot('myDiv', data, layout);
+
+        } catch (error) {
+            console.error("Error loading data:", error);
+        }
+    }
+
+    // Load the data and render the map
+    loadData();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>แผนภูมิพื้นที่เสี่ยงภัยพิบัติธรรมชาติ- Infographic</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .chart-row {
+            display: flex;
+            justify-content: space-around; 
+            flex-wrap: wrap; 
+            margin-bottom: 20px; 
+        }
+        .chart-container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin: 10px;
+            width: 300px;
+            text-align: center;
+        }
+        .chart-title {
+            background-color: #0079c2;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .bar {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+        }
+        .bar-1 { background-color: #d50000; width: 100%; }
+        .bar-2 { background-color: #f4511e; width: 80%; }
+        .bar-3 { background-color: #ff8f00; width: 70%; }
+        .bar-4 { background-color: #ffa000; width: 65%; }
+        .graph-container {
+            width: 100%;
+            display: flex;
+            justify-content: center; 
+            margin-top: 20px;
+        }
+        canvas {
+            max-width: 600px; 
+            width: 100%; 
+        }
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 style="text-align:center; color:#0079c2;">แผนภูมิพื้นที่เสี่ยงภัยพิบัติธรรมชาติ</h1>
+
+    <div class="chart-row">
+        <div class="chart-container">
+            <div class="chart-title">อำเภอที่เสี่ยงน้ำท่วมขัง</div>
+            <div class="bar bar-1">อำเภอเมือง (10%)</div>
+            <div class="bar bar-2">อำเภอกะทู้ (9%)</div>
+            <div class="bar bar-3">อำเภอถลาง (8.06%)</div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">อำเภอที่เสี่ยงน้ำล้นตลิ่ง</div>
+            <div class="bar bar-1">อำเภอเมือง (12.45%)</div>
+            <div class="bar bar-2">อำเภอกะทู้ (9.2%)</div>
+            <div class="bar bar-3">อำเภอถลาง (6.06%)</div>
+        </div>
+
+        <div class="chart-container">
+            <div class="chart-title">อำเภอที่เสี่ยงน้ำป่าท่วมฉับพลัน</div>
+            <div class="bar bar-1">อำเภอเมือง (15.45%)</div>
+            <div class="bar bar-2">อำเภอกะทู้ (10.2%)</div>
+            <div class="bar bar-3">อำเภอถลาง (7.06%)</div>
+        </div>
+    </div>
+
+    <div class="graph-container">
+        <canvas id="floodChart"></canvas>
+    </div>
+
+    <div class="footer">
+        ข้อมูลแสดงอัตราเสี่ยงน้ำท่วมขัง น้ำล้นตลิ่ง และน้ำป่าท่วมฉับพลันในแต่ละอำเภอ
+    </div>
+</div>
+
+<script>
+    const ctx = document.getElementById('floodChart').getContext('2d');
+    const floodChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['อำเภอเมือง', 'อำเภอกะทู้', 'อำเภอถลาง'],
+            datasets: [{
+                label: 'น้ำท่วมขัง',
+                data: [10, 9, 8.06],
+                backgroundColor: '#d50000',
+                borderColor: '#b00000',
+                borderWidth: 1
+            }, {
+                label: 'น้ำล้นตลิ่ง',
+                data: [12.45, 9.2, 6.06],
+                backgroundColor: '#f4511e',
+                borderColor: '#d84315',
+                borderWidth: 1
+            }, {
+                label: 'น้ำป่าท่วมฉับพลัน',
+                data: [15.45, 10.2, 7.06],
+                backgroundColor: '#ff8f00',
+                borderColor: '#ff6f00',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    title: {
+                        display: true,
+                        text: 'เปอร์เซ็นต์ (%)'
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: 'อำเภอ'
+                    }
+                }
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>W3.CSS Template</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leaflet with Google Maps</title>
+<!-- ใส่ CSS และ JavaScript ของ Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>  
+
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Risk Status Dashboard</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
+</style>
+</head>
+<body class="w3-light-grey">
+
+<!-- Top container -->
+<div class="w3-bar w3-top w3-black w3-large" style="z-index:4">
+  <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i class="fa fa-bars"></i> Menu</button>
+  <span class="w3-bar-item w3-right">NICHAKORN</span>
+</div>
+
+<!-- Sidebar/menu -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:300px;" id="mySidebar"><br>
+  <div class="w3-container w3-row">
+    <style>
+      .welcome-text {
+        font-weight: bold;
+        text-align: center;
+        display: block; /* Makes the span behave like a block element to center it */
+        font-size: 18px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+  
+    <div class="w3-col s8 w3-bar">
+      <span class="welcome-text">Welcome<strong></strong></span><br>
+    </div>
+  
+  </div>
+  <hr>
+  <div class="w3-container">
+    <h5>Menu</h5>
+  </div>
+  <style>
+    .sidebar {
+      width: 250px;
+      background-color: #f5f9ff;
+      font-family: Arial, sans-serif;
+      border-radius: 10px;
+      padding: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar a {
+      padding: 15px;
+      margin: 8px 0;
+      background-color: #e0f2ff;
+      color: #0077b6;
+      text-decoration: none;
+      display: block;
+      border-radius: 8px;
+      font-size: 16px;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+    .sidebar a:hover {
+      background-color: #b3e5fc;
+      color: #034078;
+    }
+
+    .sidebar a.active {
+      background-color: #0077b6;
+      color: #ffffff;
+    }
+
+    .sidebar i {
+      margin-right: 10px;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="sidebar">
+  <a href="#Natural disaster Overview" class="w3-bar-item active">
+    <i class="fas fa-globe-americas"></i> Natural Disaster Overview
+  </a>
+  
+  <a href="#Natural disaster Maps" class="w3-bar-item">
+    <i class="fas fa-map-marked-alt"></i> Natural Disaster Maps
+  </a>
+  
+  <a href="#Natural Disaster Description" class="w3-bar-item">
+    <i class="fas fa-info-circle"></i> Natural Disaster Description
+  </a>
+  
+  <a href="D:/6530212008_Y3/A.Kai/Project/donut_test.html" class="w3-bar-item">
+    <i class="fas fa-chart-pie"></i> Natural Disaster Chart
+  </a>
+  
+  <a href="D:/6530212008_Y3/A.Kai/s988324_373/widgets/form.html" class="w3-bar-item">
+    <i class="fas fa-envelope"></i> Contact
+  </a>
+</div>
+
+<script>
+  // JavaScript function to toggle the menu (if needed)
+  function w3_open() {
+    document.querySelector(".sidebar").classList.toggle("w3-hide-large");
+  }
+</script>
+</nav>    
+  
+
+<!-- Overlay effect when opening sidebar on small screens -->
+<div class="w3-overlay w3-hide-large w3-animate-opacity" onclick="w3_open()" style="cursor:pointer" title="close side menu" id="myOverlay"></div>
+
+<!-- !PAGE CONTENT! -->
+<div class="w3-main" id="Natural disaster 0verview" style="margin-left:300px;margin-top:43px;">
+
+  <!-- Header -->
+  <header class="w3-container" style="padding-top:22px">
+    <!--<canvas id="myChart" style="width:100%;max-width:600px"></canvas>-->
+    <h5><b><i class="fa fa-dashboard" ></i>Natural Disaster 0verview</b></h5>
+  </header>
+
+  <style>
+        .w3-quarter {
+            padding: 15px;
+        }
+        .card {
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: 0.3s;
+    background: linear-gradient(to bottom right, #2980b9, #6dd5ed); /* ไล่ระดับสีที่นี่ */
+}
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+        .icon {
+            font-size: 60px;
+            margin-right: 15px;
+            color: #fff;
+        }
+        h4 {
+            margin-top: 10px;
+            font-weight: 500;
+            font-size: 1.2em;
+            color: #f1f1f1;
+        }
+        .count {
+            font-size: 2em;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="w3-row-padding w3-margin-bottom">
+  <div class="w3-quarter">
+    <a href="D:\6530212008_Y3\A.Kai\Project\test.html" style="text-decoration: none;">
+        <div class="card w3-padding-16" style="text-align: center; background-color: #e74c3c;">
+            <span class="count w3-right"></span>
+            <div class="w3-clear"></div>
+            <h4 style="font-size: 24px;">Diagram</h4>
+        </div>
+    </a>
+</div>
+<div class="w3-quarter">
+  <a href="D:\6530212008_Y3\A.Kai\Project\test_dis1.html" style="text-decoration: none;">
+    <div class="card w3-padding-16" style="text-align: center; background-color: #2980b9;">
+        <span class="count w3-right"></span>
+        <div class="w3-clear"></div>
+        <h4 style="font-size: 24px;">Waterlogging</h4>
+    </div>
+  </a>
+</div>
+    <div class="w3-quarter">
+      <a href="D:\6530212008_Y3\A.Kai\Project\test_dis2.html" style="text-decoration: none;">
+      <div class="card w3-padding-16" style="text-align: center;background-color: #3498db ;">
+          <span class="count w3-right"></span>
+          <div class="w3-clear"></div>
+          <h4 style="font-size: 24px;">River overflow</h4>
+      </div>
+    </a> 
+    </div>
+    <div class="w3-quarter">
+      <a href="D:\6530212008_Y3\A.Kai\Project\test_dis3.html" style="text-decoration: none;">
+      <div class="card w3-padding-16" style="text-align: center;background-color: #5499c7 ;">
+          <span class="count w3-right"></span>
+          <div class="w3-clear"></div>
+          <h4 style="font-size: 24px;">Flash flood</h4>
+      </div>
+    </a>
+    </div>
+</div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phuket Flood Risk Map</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+      #map { height: 400px; width: 100%; }
+  </style>
+</head>
+<body>
+
+  <h5><b><i class="fa fa-dashboard" ></i>Natural disaster Maps</b></h5>
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script>
+  // Initialize the map and set its view to Phuket
+  var map = L.map('map').setView([7.8804, 98.3923], 11);
+
+  // Load and display OpenStreetMap tiles
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 18,
+  }).addTo(map);
+
+  // Data points
+  var data = [
+      { "Risk level code": 1, "Meaning": "พื้นที่เสี่ยงต่ำมาก", "District": "เมืองภูเก็ต", "Community": "เมืองเก่าชาร์เตอร์แบงค์","Disaster Types":"Flooded water","Disaster Types":"River overflow","X": 7.885713, "Y": 98.389212 },
+      { "Risk level code": 4, "Meaning": "พื้นที่เสี่ยงสูง", "District": "เมืองภูเก็ต", "Community": "ถนนสุทัศน์ ซอย 2", "X": 7.888774, "Y": 98.393332 },
+      { "Risk level code": 2, "Meaning": "พื้นที่เสี่ยงต่ำ", "District": "เมืองภูเก็ต", "Community": "เกาะแก้ว หมู่ 1","Disaster Types":"Flooded water", "X": 7.942502, "Y": 98.395392 },
+      { "Risk level code": 5, "Meaning": "พื้นที่เสี่ยงสูงมาก", "District": "กะทู้", "Community": "หาดป่าตอง", "X": 7.890304, "Y": 98.291022 },
+      {"Risk level code": 2,"Meaning": "พื้นที่เสี่ยงต่ำ","District": "เมืองภูเก็ต","Community": "","Disaster Types":"Flooded water", "X": 7.967663,"Y": 98.364493 },
+      {"Risk level code": 4,"Meaning": "พื้นที่เสี่ยงสูง","District": "เมืองภูเก็ต","Community": "","Disaster Types":"Flooded water","X": 7.918359,"Y": 98.388182},
+      {"Risk level code": 4,"Meaning": "พื้นที่เสี่ยงสูง","District": "เมืองภูเก็ต","Community": "","X": 7.897276,"Y": 98.409468},
+      {"Risk level code": 2,"Meaning": "พื้นที่เสี่ยงต่ำ","District": "เมืองภูเก็ต","Community": "","Disaster Types":"Flooded water","X": 7.867009,"Y": 98.331534},
+      {"Risk level code": 4,"Meaning": "พื้นที่เสี่ยงสูง","District": "เมืองภูเก็ต","Community": "","Disaster Types":"Flooded water","Disaster Types":"Flash flood","X": 7.850004,"Y": 98.296515},
+      {"Risk level code": 1,"Meaning": "พื้นที่เสี่ยงต่ำมาก","District": "กะทู้","Community": "ศาลเจ้ากะทู้","X": 7.914279,"Y": 98.341147},
+      {"Risk level code": 1,"Meaning": "พื้นที่เสี่ยงต่ำมาก","District": "กะทู้","Community": "เบ้ฮั้ว","Disaster Types":"Flooded water","X": 7.899996,"Y": 98.355395},
+      {"Risk level code": 1,"Meaning": "พื้นที่เสี่ยงต่ำมาก","District": "กะทู้","Community": "อิรวดี","Disaster Types":"Flooded water","X": 7.895065,"Y": 98.35385},
+      {"Risk level code": 3,"Meaning": "พื้นที่เสี่ยงปานกลาง","District": "กะทู้","Community": "ปั๊กกั้วหลาว","X": 7.92618,"Y": 98.333251},
+      {"Risk level code": 3,"Meaning": "พื้นที่เสี่ยงปานกลาง","District": "กะทู้","Community": "กะหลิม","Disaster Types":"Flooded water","Disaster Types":"Flash flood","X": 7.913258,"Y": 98.295142},
+      {"Risk level code": 3,"Meaning": "พื้นที่เสี่ยงปานกลาง","District": "กะทู้","Community": "โคกมะขาม","Disaster Types":"Flooded water","Disaster Types":"Flash flood","X": 7.906117,"Y": 98.301665},
+      {"Risk level code": 5,"Meaning": "พื้นที่เสี่ยงสูงมาก","District": "กะทู้","Community": "หาดป่าตอง","Disaster Types":"Flooded water","X": 7.890304,"Y": 98.291022},
+      {"Risk level code": 2,"Meaning": "พื้นที่เสี่ยงต่ำ","District": "กะทู้","Community": "","Disaster Types":"Flooded water","Disaster Types":"Flash flood","X": 7.954063,"Y": 98.296515},
+      {"Risk level code": 2,"Meaning": "พื้นที่เสี่ยงต่ำ","District": "กะทู้","Community": "","Village number": 6,"X": 7.943862,"Y": 98.279349},
+      {"Risk level code": 3,"Meaning": "พื้นที่เสี่ยงปานกลาง","District": "กะทู้","Community": "","Disaster Types":"Flooded water","Disaster Types":"Flash flood","X": 7.946242,"Y": 98.285872},
+      {"Risk level code": 4,"Meaning": "พื้นที่เสี่ยงสูง","District": "กะทู้","Community": "","Disaster Types":"Flooded water","Disaster Types":"Flash flood","X": 7.944882,"Y": 98.288619},
+      {"Risk level code": 4,"Meaning": "พื้นที่เสี่ยงสูง","District": "กะทู้","Community": "","Disaster Types":"Flooded water","Disaster Types":"Flash flood","X": 7.958823,"Y": 98.282439},
+      {"Risk level code": 2,"Meaning": "พื้นที่เสี่ยงต่ำ","District": "ถลาง","Community": "เชิงทะเล","Disaster Types":"Flooded water","X": 7.993503,"Y": 98.308188},
+      {"Risk level code": 2,"Meaning": "พื้นที่เสี่ยงต่ำ","District": "ถลาง","Community": "","X": 8.022061,"Y": 98.304755},
+      {"Risk level code": 4,"Meaning": "พื้นที่เสี่ยงสูง","District": "ถลาง","Community": "","X": 7.993843,"Y": 98.40758},
+      {"Risk level code": 2,"Meaning": "พื้นที่เสี่ยงต่ำ","District": "ถลาง","Community": "","Disaster Types":"Flooded water","X": 8.099565,"Y": 98.304755},
+      // Add more data points as needed
+  ];
+
+  // Define a function to set marker color based on risk level
+  function getColor(riskLevel) {
+      switch(riskLevel) {
+          case 1: return "green";
+          case 2: return "yellow";
+          case 3: return "orange";
+          case 4: return "red";
+          case 5: return "darkred";
+          default: return "gray";
+      }
+  }
+
+  // Add markers to the map
+  data.forEach(function(entry) {
+      var color = getColor(entry["Risk level code"]);
+      var marker = L.circleMarker([entry.X, entry.Y], {
+          color: color,
+          radius: 8,
+          fillOpacity: 0.7
+      }).addTo(map);
+      
+      marker.bindPopup(`<b>Community:</b> ${entry.Community}<br><b>District:</b> ${entry.District}<br><b>Risk Level:</b> ${entry.Meaning}<br><b>Disaster Types:</b> ${entry.DisasterTypes}`);
+  });
+</script>
+</body>
+<!---จบแผนที่-->
+<body>
+  <div id="natural-disaster-description">
+    <h5><b><i class="fa fa-dashboard"></i> Natural Disaster Description</b></h5>
+  </div>
+
+  <table border="1" style="width:100%; border-collapse: collapse;">
+    <thead>
+      <tr style="background-color: #E0FFFF; height: 80px;">
+        <th style="width: 20%;">ระดับความเสี่ยง</th>
+        <th style="width: 20%;">ความหมาย</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr style="background-color: #00FF00; height: 60px;">
+        <td>1</td>
+        <td>พื้นที่เสี่ยงต่ำมาก</td>
+      </tr>
+      <tr style="background-color: #FFFF00;height: 60px;">
+        <td>2</td>
+        <td>พื้นที่เสี่ยงต่ำ</td>
+      </tr>
+      <tr style="background-color: #FFA500;height: 60px;">
+        <td>3</td>
+        <td>พื้นที่เสี่ยงปานกลาง</td>
+      </tr>
+      <tr style="background-color: #FF0000;height: 60px;">
+        <td>4</td>
+        <td>พื้นที่เสี่ยงสูง</td>
+      </tr>
+      <tr style="background-color: #800000;height: 60px;">
+        <td>5</td>
+        <td>พื้นที่เสี่ยงสูงมาก</td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+
+   <!-- donut chart -->
+    <!-- Header -->
+  
+<!-- end donut chart -->
+
+<!-- My chart -->
+<!--End My chart -->
+
+<!-- contact -->
+ 
+ 
+
+  <!-- Footer -->
+  <footer class="w3-container w3-padding-16 w3-light-grey">
+    <h4>FOOTER</h4>
+    <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+  </footer>
+
+  <!-- End page content -->
+</div>
+
+<script>
+// Get the Sidebar
+var mySidebar = document.getElementById("mySidebar");
+
+// Get the DIV with overlay effect
+var overlayBg = document.getElementById("myOverlay");
+
+// Toggle between showing and hiding the sidebar, and add overlay effect
+function w3_open() {
+  if (mySidebar.style.display === 'block') {
+    mySidebar.style.display = 'none';
+    overlayBg.style.display = "none";
+  } else {
+    mySidebar.style.display = 'block';
+    overlayBg.style.display = "block";
+  }
+}
+
+// Close the sidebar with the close button
+function w3_close() {
+  mySidebar.style.display = "none";
+  overlayBg.style.display = "none";
+}
+</script>
+
+</body>
+</html>
